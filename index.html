@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مؤسسة الأمل للمساعدات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ألوان وأنماط المنظمات الخيرية */
+        :root {
+            --primary-color: #00796b; /* أخضر مائي داكن */
+            --secondary-color: #4db6ac; /* أخضر مائي فاتح */
+            --background-light: #e0f2f1; /* أخضر فاتح جداً للخلفية */
+            --text-color: #37474f; /* لون نص داكن */
+            --card-bg: #ffffff; /* خلفية البطاقة */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: var(--background-light);
+            color: var(--text-color);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            max-width: 550px;
+            width: 90%;
+            transition: transform 0.3s ease-in-out;
+            z-index: 10;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .icon-container {
+            font-size: 60px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+        .sub-heading {
+            color: var(--text-color);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 12px 12px 45px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .form-group .icon {
+            position: absolute;
+            top: 45px;
+            left: 15px;
+            font-size: 1.2em;
+            color: #999;
+            pointer-events: none;
+        }
+        .gender-options {
+            display: flex;
+            justify-content: space-around;
+        }
+        .gender-options label {
+            font-weight: normal;
+        }
+        .step-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: auto;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .step-button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .share-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 28px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .share-button:hover {
+            transform: scale(1.1);
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .whatsapp { background-color: #25D366; }
+        .facebook { background-color: #1877F2; }
+        .telegram { background-color: #0088CC; }
+        .step-info {
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #90caf9;
+        }
+        .step-info p {
+            margin: 0;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        /* تأثير سقوط النقود */
+        .money {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            animation: fall linear infinite;
+        }
+        .money i {
+            font-size: 25px;
+            color: #ffc107; /* لون الذهب للنقود */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        @keyframes fall {
+            0% { top: -10%; opacity: 1; }
+            100% { top: 110%; opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon-container">
+            <i class="fas fa-hand-holding-usd"></i>
+        </div>
+        
+        <div id="registration-section">
+            <h1>الخطوة الأولى: سجل بياناتك</h1>
+            <p class="sub-heading">يرجى تسجيل بياناتك للتأهل للمساعدات المالية.</p>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">الاسم بالكامل:</label>
+                    <input type="text" id="name" name="name" required>
+                    <i class="fas fa-user icon"></i>
+                </div>
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <i class="fas fa-phone icon"></i>
+                </div>
+                <div class="form-group">
+                    <label>الجنس:</label>
+                    <div class="gender-options">
+                        <label><input type="radio" name="gender" value="ذكر" required> ذكر</label>
+                        <label><input type="radio" name="gender" value="أنثى"> أنثى</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country">الدولة:</label>
+                    <input type="text" id="country" name="country" required>
+                    <i class="fas fa-globe-africa icon"></i>
+                </div>
+                <div class="form-group">
+                    <label for="city">المحافظة:</label>
+                    <input type="text" id="city" name="city" required>
+                    <i class="fas fa-city icon"></i>
+                </div>
+                <div class="form-group">
+                    <label for="family-count">عدد أفراد الأسرة:</label>
+                    <input type="number" id="family-count" name="family-count" min="1" required>
+                    <i class="fas fa-users icon"></i>
+                </div>
+                <div class="form-group">
+                    <label for="job">العمل:</label>
+                    <input type="text" id="job" name="job" required>
+                    <i class="fas fa-briefcase icon"></i>
+                </div>
+                <button type="submit" class="step-button">موافق</button>
+            </form>
+        </div>
+
+        <div id="channel-section" style="display: none;">
+            <h1>الخطوة الثانية: اشترك في القناة</h1>
+            <p class="sub-heading">لقد قمت بإكمال الخطوة الأولى بنجاح. يرجى الاشتراك في القناة لإكمال التسجيل.</p>
+            <a href="https://www.youtube.com/@Hawaii1-pg1kt" target="_blank" class="step-button" id="subscribe-button">
+                اشترك الآن
+            </a>
+            <p id="return-message" style="display: none; color: #555; margin-top: 15px;">اذا لم تقم بالاستراك بالقناة فان تسجيلك لا يقبل .قم بالاشتراك، واضغط على الزر أدناه.</p>
+            <button class="step-button" id="next-step-button" style="display: none;">الخطوة التالية</button>
+        </div>
+
+        <div id="share-section" style="display: none;">
+            <h1>الخطوة الأخيرة: شارك الرابط!</h1>
+            <div class="step-info">
+                <p>⚠️ **ملاحظة هامة:** يجب عليك مشاركة الرابط مع 10 أشخاص ليتم قبول تسجيلك.</p>
+            </div>
+            <p class="sub-heading">لقد أكملت جميع الخطوات، بقي خطوة أخيرة للتأهل للمساعدات.</p>
+            <div class="share-buttons">
+                <a href="#" class="share-button whatsapp" onclick="share('whatsapp'); return false;"><i class="fab fa-whatsapp"></i></a>
+
+                <a href="#" class="share-button telegram" onclick="share('telegram'); return false;"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            
+            <button class="step-button" id="confirm-share-button" style="display: none;">أنا متأكد من المشاركة</button>
+        </div>
+
+        <div id="success-section" style="display: none;">
+            <h1>تم التسجيل بنجاح! 🎉</h1>
+            <p class="sub-heading">شكراً لك على إكمال جميع الخطوات.</p>
+            <div class="step-info">
+                <p>سوف نراجع بياناتك وإذا تم قبولك، سنرسل لك رسالة تأكيد عبر رقمك الذي أدخلته.</p>
+            </div>
+            <div class="icon-container">
+                <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 80px;"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // دالة إنشاء النقود وسقوطها
+        function createMoney() {
+            const money = document.createElement('div');
+            money.classList.add('money');
+            money.innerHTML = '<i class="fas fa-sack-dollar"></i>';
+            money.style.left = Math.random() * 100 + 'vw';
+            money.style.animationDuration = Math.random() * 2 + 3 + 's';
+            money.style.opacity = Math.random();
+            document.body.appendChild(money);
+            
+            setTimeout(() => {
+                money.remove();
+            }, 5000);
+        }
+        setInterval(createMoney, 300);
+
+        // روابط ورسائل المشاركة
+        var referralLink = encodeURIComponent("https://example.com/your-referral-link");
+        var message = encodeURIComponent("انضم إلينا في برنامج المساعدات المالية! سجل الآن من خلال هذا الرابط: " + referralLink);
+
+        // عند إرسال نموذج التسجيل (الخطوة 1)
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert("تم إرسال بياناتك بنجاح! سيتم مراجعتها قريباً.");
+            document.getElementById('registration-section').style.display = 'none';
+            document.getElementById('channel-section').style.display = 'block';
+        });
+
+        // عند الضغط على زر "اشترك الآن" (الخطوة 2)
+        document.getElementById('subscribe-button').addEventListener('click', function() {
+            document.getElementById('return-message').style.display = 'block';
+            document.getElementById('next-step-button').style.display = 'block';
+        });
+
+        // عند الضغط على زر "الخطوة التالية" في قسم الاشتراك
+        document.getElementById('next-step-button').addEventListener('click', function() {
+            document.getElementById('channel-section').style.display = 'none';
+            document.getElementById('share-section').style.display = 'block';
+        });
+
+        // دالة المشاركة
+        function share(platform) {
+            var url = '';
+            if (platform === 'whatsapp') {
+                url = "whatsapp://send?text=" + message;
+            } else if (platform === 'facebook') {
+                url = "https://www.facebook.com/sharer/sharer.php?u=" + referralLink;
+            } else if (platform === 'telegram') {
+                url = "https://t.me/share/url?url=" + referralLink + "&text=" + message;
+            }
+            window.open(url, '_blank');
+            
+            // إظهار زر التأكيد بعد الضغط على أحد أزرار المشاركة
+            document.getElementById('confirm-share-button').style.display = 'inline-block';
+        }
+
+        // عند الضغط على زر "أنا متأكد من المشاركة"
+        document.getElementById('confirm-share-button').addEventListener('click', function() {
+            document.getElementById('share-section').style.display = 'none';
+            document.getElementById('success-section').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
